@@ -30,7 +30,7 @@ func main() {
 	// For the Golang framework: GoFiber
 	// app := fiber.New()
 
-	// app.Static("/", "./build")
+	// app.Static("/", "../frontendBuild")
 
 	// app.Listen(":" + port)
 }
