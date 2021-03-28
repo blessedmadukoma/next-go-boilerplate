@@ -1,6 +1,6 @@
 backend/.env
 frontend/.env
-frontend/package_lock.json
+frontend/package-lock.json
 frontend/node_modules
 frontendBuild
 .git
