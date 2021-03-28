@@ -1,5 +1,4 @@
 backend/.env
-frontend/.env
 frontend/package-lock.json
 frontend/node_modules
 frontendBuild
