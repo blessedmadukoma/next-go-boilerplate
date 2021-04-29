@@ -2,6 +2,10 @@ import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 
 export default function Home() {
+  const registerUser = event => {
+    event.preventDefault() // don't redirect the page
+    // where we'll add our form logic
+  }
   return (
     <div className={styles.container}>
       <Head>
