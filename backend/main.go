@@ -6,32 +6,11 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"reflect"
 
 	"github.com/joho/godotenv"
 	// "github.com/gofiber/fiber/v2"
 )
-
-func formHandler(w http.ResponseWriter, r *http.Request) {
-	if r.Method == "POST" {
-		err := r.ParseForm()
-		if err != nil {
-			log.Println("Error parsing form:", err)
-		}
-
-		fmt.Println("Form Parsed!!!")
-
-		name := r.PostFormValue("name")
-		fmt.Printf("Hello, %s!\n", name)
-	}
-
-	file := "../frontendBuild/form.html"
-	pt, _ := template.ParseFiles(file)
-	err := pt.Execute(w, nil)
-	if err != nil {
-		log.Println("Error executing template:", err)
-	}
-
-}
 
 func main() {
 	fmt.Println("Golang and Next.js connection")
@@ -48,16 +27,8 @@ func main() {
 	http.Handle("/", fs)
 	http.HandleFunc("/form", formHandler)
 
-	// Gorilla Mux
-	// r := mux.NewRouter()
-
-	// r.PathPrefix("/").Handler(http.StripPrefix("/", http.FileServer(http.Dir("../frontendBuild"))))
-
-	// r.HandleFunc("/form", formHandler)
-
 	fmt.Println("Starting server on port:", port)
 	http.ListenAndServe(":"+port, nil)
-	// http.ListenAndServe(":"+port, r)
 
 	// For the Golang framework: GoFiber
 	// app := fiber.New()
@@ -65,4 +36,21 @@ func main() {
 	// app.Static("/", "../frontendBuild")
 
 	// app.Listen(":" + port)
+}
+
+func formHandler(w http.ResponseWriter, r *http.Request) {
+	form := "../frontendBuild/form.html"
+	println("Method used:", r.Method)
+	if r.Method == "GET" {
+		t, _ := template.ParseFiles(form)
+		t.Execute(w, nil)
+	} else {
+		r.ParseForm()
+		// logic part of log in
+		name := r.FormValue("name")
+		fmt.Println("name:", r.Form["name"])
+		// fmt.Fprintf(w, "name: %s", r.Form["name"])
+		fmt.Println("name:", r.FormValue("name"), "type:", reflect.TypeOf(name))
+		fmt.Fprintf(w, "name: %s", r.FormValue("name"))
+	}
 }
