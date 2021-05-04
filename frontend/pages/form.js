@@ -10,7 +10,7 @@ export default function Form() {
       </Head>
 
       <main className={styles.main}>
-
+        <h3><a href="/">Home</a></h3>
         <form method="POST">
           <label htmlFor="name">Name</label>
           <input id="name" name="name" type="text" autoComplete="name" required />
